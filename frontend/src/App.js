@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -13,11 +14,8 @@ function App() {
   });
 
   const [listingPrice, setListingPrice] = useState("");
-
   const [prediction, setPrediction] = useState(null);
-
   const [analysis, setAnalysis] = useState("");
-
   const [differenceAmount, setDifferenceAmount] = useState(0);
 
   const handleChange = (e) => {
@@ -55,78 +53,89 @@ function App() {
 
     const difference =
       ((listingPrice - predictedValue) /
-      predictedValue) *
+        predictedValue) *
       100;
 
     if (difference > 10) {
       setAnalysis(
-      `Overpriced by ${difference.toFixed(2)}%`
+        `Overpriced by ${difference.toFixed(2)}%`
       );
     } else if (difference < -10) {
       setAnalysis(
-      `Underpriced by ${Math.abs(
-      difference
-      ).toFixed(2)}%`
-    );
+        `Underpriced by ${Math.abs(
+          difference
+        ).toFixed(2)}%`
+      );
     } else {
-    setAnalysis(
-      "Fairly Priced"
-    );
+      setAnalysis("Fairly Priced");
     }
   };
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h1>Real Estate Fair Value Estimator</h1>
+    <div className="container">
+      <div className="card">
+        <h1>Real Estate Fair Value Estimator</h1>
 
-      <form onSubmit={handleSubmit}>
-        {Object.keys(formData).map((field) => (
-          <div key={field}>
+        <form onSubmit={handleSubmit}>
+          {Object.keys(formData).map((field) => (
+            <div key={field}>
+              <input
+                name={field}
+                placeholder={field}
+                onChange={handleChange}
+              />
+            </div>
+          ))}
+
+          <br />
+
+          <div>
             <input
-              name={field}
-              placeholder={field}
-              onChange={handleChange}
+              type="number"
+              placeholder="Listing Price ($)"
+              value={listingPrice}
+              onChange={(e) =>
+                setListingPrice(Number(e.target.value))
+              }
             />
           </div>
-        ))}
-        <br />
-        <div>
-          <input
-            type="number"
-            placeholder="Listing Price ($)"
-            value={listingPrice}
-            onChange={(e) =>
-              setListingPrice(Number(e.target.value))
-            }
-          />
-        </div>
 
-        <br />
+          <br />
 
-        <button type="submit">
-          Predict
-        </button>
-      </form>
+          <button type="submit">
+            Predict
+          </button>
+        </form>
 
-      {prediction && (
-        <>
-        <h2>
-          Estimated Value: $
-          {(prediction * 100000).toLocaleString()}
-        </h2>
-        <p>
-          Difference: $
-          {differenceAmount.toLocaleString()}
-        </p>
-        
-        <h3>
-          {analysis}
-        </h3>
-        </>
-        
-      )}
+        {prediction && (
+          <div className="result">
+            <h2>
+              Estimated Value: $
+              {(prediction * 100000).toLocaleString()}
+            </h2>
+
+            <p>
+              Difference: $
+              {differenceAmount.toLocaleString()}
+            </p>
+
+            <h3
+              className={
+                analysis.includes("Overpriced")
+                  ? "overpriced"
+                  : analysis.includes("Underpriced")
+                  ? "underpriced"
+                  : "fair"
+              }
+            >
+              {analysis}
+            </h3>
+          </div>
+        )}
+      </div>
     </div>
   );
+   
 }
 
 export default App;
