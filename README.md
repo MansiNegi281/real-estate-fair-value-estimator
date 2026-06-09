@@ -1,38 +1,48 @@
 # Real Estate Fair Value Estimator
 
-A full-stack machine learning application that predicts property values and identifies overpriced or underpriced listings.
+A machine learning-powered web application that estimates the fair market value of a property and identifies whether a listing is overpriced or underpriced.
 
 ## Features
 
-- House price prediction using Machine Learning
+- House price prediction using Random Forest Regression
 - Fair market value estimation
-- Overpriced/Underpriced analysis
+- Overpriced / Underpriced analysis
 - FastAPI backend
 - React frontend
-- REST API integration
+- Real-time prediction API
 
 ## Tech Stack
 
+### Backend
 - Python
-- Scikit-Learn
 - FastAPI
+- Scikit-Learn
+- Pandas
+- Joblib
+
+### Frontend
 - React
 - JavaScript
+- CSS
 
-## Project Workflow
+## Workflow
 
-1. User enters property details
-2. ML model predicts fair market value
-3. User enters listing price
-4. System compares listing price with predicted value
-5. Application reports whether the property is fairly priced, overpriced, or underpriced
+1. User enters property details.
+2. ML model predicts fair market value.
+3. User enters listing price.
+4. System compares listing price with fair value.
+5. Application displays:
+   - Estimated Value
+   - Difference Amount
+   - Overpriced / Underpriced Percentage
 
 ## Future Improvements
 
-- Bootstrap UI redesign
 - Interactive maps
-- SHAP explainability
-- Deployment on Vercel and Render
+- Property image uploads
+- Nearby amenities scoring
+- Explainable AI (SHAP)
+- Cloud deployment
 
 ## Author
 
