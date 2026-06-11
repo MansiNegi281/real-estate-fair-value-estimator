@@ -1,6 +1,17 @@
 import { useState } from "react";
 import "./App.css";
 
+const fieldLabels = {
+  MedInc: "Median Income",
+  HouseAge: "House Age",
+  AveRooms: "Average Rooms",
+  AveBedrms: "Average Bedrooms",
+  Population: "Population",
+  AveOccup: "Average Occupancy",
+  Latitude: "Latitude",
+  Longitude: "Longitude",
+};
+
 function App() {
   const [formData, setFormData] = useState({
     MedInc: "",
@@ -78,10 +89,14 @@ function App() {
 
         <form onSubmit={handleSubmit}>
           {Object.keys(formData).map((field) => (
-            <div key={field}>
+            <div className="input-group" key={field}>
+              <label>
+                {fieldLabels[field]}
+              </label>
+
               <input
                 name={field}
-                placeholder={field}
+                type="number"
                 onChange={handleChange}
               />
             </div>
@@ -109,27 +124,19 @@ function App() {
 
         {prediction && (
           <div className="result">
-            <h2>
-              Estimated Value: $
-              {(prediction * 100000).toLocaleString()}
-            </h2>
+            <h2>Estimated Market Value</h2>
 
-            <p>
+            <div className="price">
+              $
+              {(prediction * 100000).toLocaleString()}
+            </div>
+
+            <div className="diff">
               Difference: $
               {differenceAmount.toLocaleString()}
-            </p>
+            </div>
 
-            <h3
-              className={
-                analysis.includes("Overpriced")
-                  ? "overpriced"
-                  : analysis.includes("Underpriced")
-                  ? "underpriced"
-                  : "fair"
-              }
-            >
-              {analysis}
-            </h3>
+            <h3>{analysis}</h3>
           </div>
         )}
       </div>
@@ -137,5 +144,9 @@ function App() {
   );
    
 }
+
+<footer>
+  Built with React, FastAPI and Machine Learning
+</footer>
 
 export default App;
