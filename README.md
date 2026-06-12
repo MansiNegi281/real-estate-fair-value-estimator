@@ -44,6 +44,10 @@ A machine learning-powered web application that estimates the fair market value 
 - Explainable AI (SHAP)
 - Cloud deployment
 
+## 🚀 Live Demo
+- **Frontend:** https://realestatefairvalueestimator.netlify.app
+- **Backend API:** https://real-estate-fair-value-estimator.onrender.com/docs
+
 ## Author
 
 Mansi Negi
