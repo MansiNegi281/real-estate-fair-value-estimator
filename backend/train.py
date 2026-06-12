@@ -41,12 +41,8 @@ score = r2_score(
 
 print(score)
 
-joblib.dump(
-
-    model,
-
-    "models/house_price_model.pkl"
-
-)
+import os
+os.makedirs('models', exist_ok=True)
+joblib.dump(model, 'models/house_price_model.pkl')
 
 print("Model saved successfully!")
